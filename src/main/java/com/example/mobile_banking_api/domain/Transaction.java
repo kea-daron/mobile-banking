@@ -37,7 +37,6 @@ public class Transaction {
     private String remark;
 
     @OneToOne(mappedBy = "transaction")
-
     @JoinColumn(name = "transaction_type_id", nullable = false)
     private TransactionType transactionType;
 

@@ -21,9 +21,6 @@ public class Account {
     @Column(nullable = false, unique = true, length = 50)
     private String accountNumber;
 
-//    @Column(nullable = false, length = 50)
-//    private String accountType;
-
     @Column(nullable = false, length = 50)
     private String accountCurrency;
 

@@ -17,23 +17,23 @@ public class MobileBankingApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		KYC kyc = new KYC();
-		Customer customer = new Customer();
-
-		kyc.setNationalCardID("999999000");
-		kyc.setIsVerified(false);
-		kyc.setIsDeleted(false);
-		kyc.setCustomer(customer);
-
-		customer.setFullName("Kea Daron");
-		customer.setGender("Male");
-		customer.setEmail("daron3327@gmail.com");
-		customer.setPhoneNumber("1234567890");
-		customer.setKyc(kyc);
-		customer.setRemark("INSTRUCTOR");
-		customer.setIsDeleted(false);
-
-		customerRepository.save(customer);
+//		KYC kyc = new KYC();
+//		Customer customer = new Customer();
+//
+//		kyc.setNationalCardID("999999000");
+//		kyc.setIsVerified(false);
+//		kyc.setIsDeleted(false);
+//		kyc.setCustomer(customer);
+//
+//		customer.setFullName("Kea Daron");
+//		customer.setGender("Male");
+//		customer.setEmail("daron3327@gmail.com");
+//		customer.setPhoneNumber("1234567890");
+//		customer.setKyc(kyc);
+//		customer.setRemark("INSTRUCTOR");
+//		customer.setIsDeleted(false);
+//
+//		customerRepository.save(customer);
 	}
 
 	public static void main(String[] args) {
