@@ -54,4 +54,10 @@ public class AccountController {
     ) {
         return accountService.updateAccountByAccountNumber(accountNumber, updateAccountRequest);
     }
+
+    @PatchMapping("/{accountNumber}/disable")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void disableAccount(@PathVariable String accountNumber) {
+        accountService.disableAccountByAccountNumber(accountNumber);
+    }
 }

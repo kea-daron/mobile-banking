@@ -120,4 +120,15 @@ public class AccountServiceImpl implements AccountService {
         return accountMapper.fromAccount(account);
     }
 
+    @Override
+    public void disableAccountByAccountNumber(String accountNumber) {
+        Account account = accountRepository
+                .findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Account not found or already disabled"));
+
+        account.setIsDeleted(true);
+        accountRepository.save(account);
+    }
+
 }
