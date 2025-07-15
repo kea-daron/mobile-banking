@@ -12,7 +12,13 @@ public record CreateCustomerRequest(
 
         String email,
         String phoneNumber,
-        String remark
+        String remark,
+
+        @NotBlank(message = "National Card ID is required")
+        String nationalCardId,
+
+        @NotBlank(message = "Segment is required")
+        String segment
 
 ) {
 }

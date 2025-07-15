@@ -1,6 +1,8 @@
 package com.example.mobile_banking_api.service;
 
+import com.example.mobile_banking_api.domain.KYC;
 import com.example.mobile_banking_api.dto.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -9,15 +11,21 @@ public interface CustomerService {
 
     // ------------------------ CUSTOMER SERVICE -------------------------------
 
+    String generateAccountNumber();
+
+    void disableCustomerByPhoneNumber(String phoneNumber);
+
+    void disableByPhoneNumber(String phoneNumber);
+
     void deleteCustomerByPhoneNumber(String phoneNumber);
 
-    CustomerRespose updateCustomerByPhoneNumber(String phoneNumber, UpdateCustomerRequest updateCustomerRequest);
+    CustomerResponse updateCustomerByPhoneNumber(String phoneNumber, UpdateCustomerRequest updateCustomerRequest);
 
-    CustomerRespose findCustomerByPhoneNumber(String phoneNumber);
+    CustomerResponse findCustomerByPhoneNumber(String phoneNumber);
 
-    List<CustomerRespose> findAll();
+    List<CustomerResponse> findAll();
 
-    CustomerRespose createNew(CreateCustomerRequest createCustomerRequest);
+    CustomerResponse createNew(CreateCustomerRequest createCustomerRequest);
 
 
 }

@@ -3,7 +3,6 @@ package com.example.mobile_banking_api.controller;
 
 import com.example.mobile_banking_api.dto.AccountResponse;
 import com.example.mobile_banking_api.dto.CreateAccountRequest;
-import com.example.mobile_banking_api.dto.CustomerRespose;
 import com.example.mobile_banking_api.dto.UpdateAccountRequest;
 import com.example.mobile_banking_api.service.AccountService;
 import jakarta.validation.Valid;

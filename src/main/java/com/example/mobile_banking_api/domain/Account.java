@@ -30,6 +30,10 @@ public class Account {
     @Column(nullable = false)
     private Boolean isDeleted;
 
+    @Column(nullable = false)
+    private BigDecimal overLimit;
+
+
     @ManyToOne
     private Customer customer;
 

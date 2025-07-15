@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,6 +48,17 @@ public class AccountServiceImpl implements AccountService {
         account.setIsDeleted(false);
         account.setCustomer(customer);
         account.setAccountType(accountType);
+
+        BigDecimal overLimit;
+        switch (customer.getSegment().toLowerCase()) {
+            case "gold" -> overLimit = BigDecimal.valueOf(50000);
+            case "silver" -> overLimit = BigDecimal.valueOf(10000);
+            case "regular" -> overLimit = BigDecimal.valueOf(5000);
+            default -> {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown customer segment");
+            }
+        }
+        account.setOverLimit(overLimit);
 
         accountRepository.save(account);
         return accountMapper.fromAccount(account);

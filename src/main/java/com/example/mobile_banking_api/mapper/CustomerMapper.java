@@ -2,7 +2,7 @@ package com.example.mobile_banking_api.mapper;
 
 import com.example.mobile_banking_api.domain.Customer;
 import com.example.mobile_banking_api.dto.CreateCustomerRequest;
-import com.example.mobile_banking_api.dto.CustomerRespose;
+import com.example.mobile_banking_api.dto.CustomerResponse;
 import com.example.mobile_banking_api.dto.UpdateCustomerRequest;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -23,7 +23,7 @@ public interface CustomerMapper {
     // Model -> DTO
     // return type is converted | target data
     // parameter is source data
-    CustomerRespose fromCustomer(Customer customer);
+    CustomerResponse fromCustomer(Customer customer);
 
     Customer toCustomer(CreateCustomerRequest createCustomerRequest);
 
