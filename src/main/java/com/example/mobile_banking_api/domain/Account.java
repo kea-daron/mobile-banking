@@ -22,23 +22,28 @@ public class Account {
     private String accountNumber;
 
     @Column(nullable = false, length = 50)
+    private String accountName;
+
+    @Column(nullable = false, length = 50)
     private String accountCurrency;
 
     @Column(nullable = false)
     private BigDecimal balance;
 
     @Column(nullable = false)
-    private Boolean isDeleted;
-
-    @Column(nullable = false)
     private BigDecimal overLimit;
 
+    @Column(nullable = false)
+    private Boolean isHide;
+
+    @Column(nullable = false)
+    private Boolean isDeleted;
 
     @ManyToOne
+    @JoinColumn(nullable = false, name = "cust_id", referencedColumnName = "id")
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_type_id", nullable = false)
+    @ManyToOne
     private AccountType accountType;
 
 }

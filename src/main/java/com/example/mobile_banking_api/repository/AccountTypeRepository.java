@@ -10,4 +10,6 @@ public interface AccountTypeRepository extends JpaRepository<AccountType, Intege
 
     Optional<AccountType> findByTypeName(String typeName);
 
+    boolean existsByTypeName(String typeName);
+
 }

@@ -2,6 +2,8 @@ package com.example.mobile_banking_api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
+
 public record CreateCustomerRequest(
 
         @NotBlank (message = "Full name is required")
@@ -10,15 +12,14 @@ public record CreateCustomerRequest(
         @NotBlank (message = "Gender is request")
         String gender,
 
+        LocalDate dob,
+
         String email,
         String phoneNumber,
         String remark,
 
-        @NotBlank(message = "National Card ID is required")
         String nationalCardId,
-
-        @NotBlank(message = "Segment is required")
-        String segment
+        String customerSegment
 
 ) {
 }

@@ -5,7 +5,11 @@ public record UpdateCustomerRequest(
 
         String fullName,
         String gender,
-        String remark
+        String remark,
+        String email,
+        String phoneNumber,
+        String nationalCardID,
+        String segment
 
 ) {
 }

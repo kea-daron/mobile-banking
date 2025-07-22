@@ -1,13 +1,14 @@
 package com.example.mobile_banking_api.service.impl;
 
-import com.example.mobile_banking_api.domain.Account;
 import com.example.mobile_banking_api.domain.Customer;
+import com.example.mobile_banking_api.domain.CustomerSegment;
 import com.example.mobile_banking_api.domain.KYC;
 import com.example.mobile_banking_api.dto.CreateCustomerRequest;
 import com.example.mobile_banking_api.dto.CustomerResponse;
 import com.example.mobile_banking_api.dto.UpdateCustomerRequest;
 import com.example.mobile_banking_api.mapper.CustomerMapper;
 import com.example.mobile_banking_api.repository.CustomerRepository;
+import com.example.mobile_banking_api.repository.CustomerSegmentRepository;
 import com.example.mobile_banking_api.repository.KYCRepository;
 import com.example.mobile_banking_api.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
     private final KYCRepository kycRepository;
+    private final CustomerSegmentRepository customerSegmentRepository;
 
 
     @Override
@@ -113,12 +114,32 @@ public class CustomerServiceImpl implements CustomerService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Phone number already exists");
         }
 
+        // validation national card id
+        if (kycRepository.existsByNationalCardID(createCustomerRequest.nationalCardId())){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "National Card ID already exists");
+        }
+
+        // validation customer segment
+        CustomerSegment customerSegment = customerSegmentRepository
+                .findBySegment(createCustomerRequest.customerSegment())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT,
+                        "Customer segment not found!"));
+
+        //Map data from DTO
         Customer customer = customerMapper.toCustomer(createCustomerRequest);
+
+        //Prepare KYC of customer
+        KYC kyc = new KYC();
+        kyc.setNationalCardID(createCustomerRequest.nationalCardId());
+        kyc.setIsVerified(false);
+        kyc.setIsDeleted(false);
+        kyc.setCustomer(customer);
 
         customer.setIsDeleted(false);
         customer.setAccounts(new ArrayList<>());
+        customer.setCustomerSegment(customerSegment);
+        customer.setKyc(kyc);
 
-        KYC kyc = new KYC();
 
         kyc.setNationalCardID(createCustomerRequest.nationalCardId());
         kyc.setIsVerified(false);
@@ -126,7 +147,11 @@ public class CustomerServiceImpl implements CustomerService {
         kyc.setCustomer(customer);
         customer.setKyc(kyc);
 
-        customerRepository.save(customer);
+        log.info("Customer before save: {}", customer.getId());
+        customer = customerRepository.save(customer);
+
+        log.info("Customer after save: {}", customer.getId());
+        customer = customerRepository.save(customer);
 
         return customerMapper.fromCustomer(customer);
     }

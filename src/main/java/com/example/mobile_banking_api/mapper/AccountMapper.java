@@ -9,11 +9,12 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
 
+    @Mapping(target = "accountCurrency", ignore = true)
+    @Mapping(target = "accountType", ignore = true)
     Account toAccount(CreateAccountRequest createAccountRequest);
 
     @Mapping(source = "customer.fullName", target = "customerName")
     @Mapping(source = "accountType.typeName", target = "accountTypeName")
-
     AccountResponse fromAccount(Account account);
 
 

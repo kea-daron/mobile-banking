@@ -12,4 +12,6 @@ public interface KYCRepository extends JpaRepository<KYC, Integer> {
     @Query("SELECT k FROM KYC k WHERE k.customer.phoneNumber = :phoneNumber AND k.isDeleted = false")
     Optional<KYC> findByCustomerPhoneNumber(String phoneNumber);
 
+    boolean existsByNationalCardID(String nationalCardID);
+
 }

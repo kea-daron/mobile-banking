@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 public record AccountResponse(
 
         String accountNumber,
+        String accountName,
         String accountCurrency,
         BigDecimal balance,
         BigDecimal overLimit,
         Boolean isDeleted,
         String customerName,
-        String accountTypeName
+        String accountTypeName,
+        Boolean isHide
 
 ) {
 }
