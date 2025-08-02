@@ -38,19 +38,19 @@ public class SecurityInit {
         if (userRepository.count() == 0) {
             User userAdmin = new User();
             userAdmin.setUsername("admin");
-            userAdmin.setPassword(passwordEncoder.encode("pwd@123"));
+            userAdmin.setPassword(passwordEncoder.encode("qwer@123"));
             userAdmin.setIsEnabled(true);
             userAdmin.setRoles(List.of(defaultRole, admin));
 
             User userStaff = new User();
             userStaff.setUsername("staff");
-            userStaff.setPassword(passwordEncoder.encode("pwd@123"));
+            userStaff.setPassword(passwordEncoder.encode("qwer@123"));
             userStaff.setIsEnabled(true);
             userStaff.setRoles(List.of(defaultRole, staff));
 
             User userCustomer = new User();
             userCustomer.setUsername("customer");
-            userCustomer.setPassword(passwordEncoder.encode("pwd@123"));
+            userCustomer.setPassword(passwordEncoder.encode("qwer@123"));
             userCustomer.setIsEnabled(true);
             userCustomer.setRoles(List.of(defaultRole, customer));
 

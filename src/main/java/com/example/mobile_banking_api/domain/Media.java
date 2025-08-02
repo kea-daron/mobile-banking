@@ -1,34 +1,32 @@
 package com.example.mobile_banking_api.domain;
 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "AccountTypes")
-public class AccountType {
-
-    /**
-     * author Kea Daron
-     */
+@Table(name = "medias")
+public class Media {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
-    private String typeName;
+    @Column(unique = true, nullable = false, length = 150)
+    private String name;
+
+    @Column(nullable = false, length = 10)
+    private String extension;
+
+    @Column(nullable = false, length = 50)
+    private String mimeTypeFile;
 
     @Column(nullable = false)
     private Boolean isDeleted;
-
-    @OneToMany(mappedBy = "accountType")
-    private List<Account> accounts;
 
 }
